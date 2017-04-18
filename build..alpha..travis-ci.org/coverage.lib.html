@@ -1,0 +1,2219 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-lynx/node_modules/lynx/lib/lynx.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-lynx">npmtest-lynx (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-lynx/node_modules/lynx/lib/lynx.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">15.94% <small>(22 / 138)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">15.94% <small>(22 / 138)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-lynx/node_modules/lynx/lib/</a> &#187; lynx.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var dgram    = require('dgram')
+  , Stream   = require('stream').Stream
+  , util     = require('util')
+  , parser   = require('statsd-parser')
+  //
+  // `Math.random` doesn't cut it, based on tests from sampling.js
+  // Variations are wild for large data sets
+  //
+  , mersenne = require('mersenne')
+  , mt       = new mersenne.MersenneTwister19937()
+  , noop     = <span class="fstat-no" title="function not covered" >function noop() {</span>}
+  ;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function makeError(opts) {</span>
+<span class="cstat-no" title="statement not covered" >  var error = new Error(opts.message);</span>
+<span class="cstat-no" title="statement not covered" >  error.f = opts.f;</span>
+<span class="cstat-no" title="statement not covered" >  error.args = opts.args;</span>
+<span class="cstat-no" title="statement not covered" >  return error;</span>
+}
+&nbsp;
+//
+// Max idle time for a ephemeral socket
+//
+var EPHEMERAL_LIFETIME_MS = 1000;
+&nbsp;
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ constructors ~~
+//
+&nbsp;
+//
+// ### constructor Lynx(host, port, socket)
+// #### @host    {String} Server host name
+// #### @port    {Number} Server port
+// #### @options {Object} Aditional options
+// #### @options.socket   {Object} Optional socket if we want to share
+// #### @options.on_error {Function} A function to execute on errors
+// #### @options.scope    {String} define the a prefix for all stats, 
+//      e.g. with `scope` 'product1' and stat 'somestat' the key would 
+//      actually be 'product1.somestat'.
+//
+// var client = new lynx('localhost', 8125);
+//
+// Returns a new `Lynx` client
+//
+<span class="fstat-no" title="function not covered" >function Lynx(host, port, options) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!(this instanceof Lynx)) {</span>
+<span class="cstat-no" title="statement not covered" >    return new Lynx(host, port, options);</span>
+  }
+  
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+&nbsp;
+  //
+  // Server hostname and port
+  //
+<span class="cstat-no" title="statement not covered" >  this.host = host || '127.0.0.1';</span>
+<span class="cstat-no" title="statement not covered" >  this.port = port || 8125;</span>
+&nbsp;
+  //
+  // Optional shared socket
+  //
+<span class="cstat-no" title="statement not covered" >  this.socket = options &amp;&amp; options.socket;</span>
+&nbsp;
+  //
+  // Handle prefix
+  //
+<span class="cstat-no" title="statement not covered" >  this.scope = options &amp;&amp; options.scope || options &amp;&amp; options.prefix || '';</span>
+&nbsp;
+  //
+  // groups in graphite are delimited by `.` so we need to make sure our
+  // scope ends with `.`. If it doesn't we just add it (unless we have no
+  // scope defined).
+  //
+<span class="cstat-no" title="statement not covered" >  if(typeof this.scope === 'string' &amp;&amp; this.scope !== '' &amp;&amp;</span>
+     !/\.$/.test(this.scope)) {
+<span class="cstat-no" title="statement not covered" >    this.scope += '.';</span>
+  }
+&nbsp;
+  //
+  // When a *shared* socked isn't provided, an ephemeral
+  // socket is demand allocated.  This ephemeral socket is closed
+  // after being idle for EPHEMERAL_LIFETIME_MS.
+  //
+<span class="cstat-no" title="statement not covered" >  this.ephemeral_socket = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  this.last_used_timer  = undefined;</span>
+&nbsp;
+  //
+  // Set out error handling code
+  //
+<span class="cstat-no" title="statement not covered" >  this.on_error = options &amp;&amp; typeof options.on_error === 'function'</span>
+               ? options.on_error
+               : this._default_error_handler
+               ; 
+&nbsp;
+  //
+  // Stream properties
+  //
+<span class="cstat-no" title="statement not covered" >  this.readable = true;</span>
+<span class="cstat-no" title="statement not covered" >  this.writable = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.parser = parser.createStream();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.parser.on('error', this.on_error);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.parser.on('stat', <span class="fstat-no" title="function not covered" >function (text, stat_obj) {</span></span>
+<span class="cstat-no" title="statement not covered" >    var stat = {};</span>
+&nbsp;
+    //
+    // Construct a statsd value|type pair
+    //
+<span class="cstat-no" title="statement not covered" >    stat[stat_obj.stat] = stat_obj.value + '|' + stat_obj.type;</span>
+&nbsp;
+    //
+    // Add sample rate if one exists
+    //
+<span class="cstat-no" title="statement not covered" >    if(stat_obj.sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >      stat[stat_obj.stat] += '@' + stat_obj.sample_rate;</span>
+<span class="cstat-no" title="statement not covered" >      self.send(stat, parseFloat(stat_obj.sample_rate));</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >      self.send(stat);</span>
+    }
+  });
+}
+&nbsp;
+util.inherits(Lynx, Stream);
+&nbsp;
+//
+// ### constructor Timer(stat, sample_rate)
+// #### @stat        {String} Stat key, in `foo:1|ms` would be foo
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// var timer  = client.Timer('foo');
+//
+// //
+// // Sends something like: `foo:100|ms` via udp to the server
+// //
+// setTimeout(function {
+//   timer.stop();
+// }, 100);
+//
+// Returns a timer. When stopped, this transmits an interval
+//
+Lynx.prototype.createTimer = <span class="fstat-no" title="function not covered" >function createTimer(stat, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  var self       = this</span>
+    , start_time = new Date ().getTime()
+    , stopped    = false
+    , duration
+    , start_hrtime
+    ;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof process.hrtime === "function") {</span>
+<span class="cstat-no" title="statement not covered" >    var start_hrtime = process.hrtime();</span>
+  }
+&nbsp;
+  //
+  // ### function stop()
+  //
+  // Stops the timer and issues the respective interval.
+  // Check example above
+  //
+<span class="fstat-no" title="function not covered" >  function stop() {</span>
+    //
+    // If timer is already stopped just ignore the request
+    //
+<span class="cstat-no" title="statement not covered" >    if(stopped) {</span>
+<span class="cstat-no" title="statement not covered" >      self.on_error(</span>
+        makeError({ message : "Can't stop a timer twice"
+        , f       : 'stop'
+        }));
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+    //
+    // Calculate duration
+    //
+<span class="cstat-no" title="statement not covered" >    if (start_hrtime) {</span>
+<span class="cstat-no" title="statement not covered" >      var stop_hrtime = process.hrtime()</span>
+        , seconds     = stop_hrtime[0] - start_hrtime[0]
+        , nanos       = stop_hrtime[1] - start_hrtime[1]
+        ;
+<span class="cstat-no" title="statement not covered" >      duration = seconds * 1000 + nanos / 1000000</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      duration = new Date ().getTime() - start_time;</span>
+    }
+&nbsp;
+    //
+    // Emit
+    //
+<span class="cstat-no" title="statement not covered" >    self.timing(stat, duration, sample_rate);</span>
+&nbsp;
+    //
+    // So no one stops a timer twice (causing two emits)
+    //
+<span class="cstat-no" title="statement not covered" >    stopped = true;</span>
+  }
+&nbsp;
+  //
+  // The closure that is returned
+  //
+<span class="cstat-no" title="statement not covered" >  return {</span>
+      stat        : stat
+    , sample_rate : sample_rate
+    , start_time  : start_time
+    , stop        : stop
+  };
+};
+&nbsp;
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ api ~~
+//
+&nbsp;
+//
+// ### function increment(stats, sample_rate)
+// #### @stats       {String|Array} Stat key, in `foo:1|ms` would be foo
+//      Optionally an array of `stats`.
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.increment('getho');
+// client.increment(['not', 'cool']);
+//
+// Incremenents the desired stat(s)
+//
+Lynx.prototype.increment = <span class="fstat-no" title="function not covered" >function increment(stats, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  this.count(stats, 1, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function decrement(stats, sample_rate)
+// #### @stats       {String|Array} Stat key, in `foo:1|ms` would be foo
+//      Optionally an array of `stats`.
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.decrement('hey.you');
+//
+// Decrements the desired stat(s)
+//
+Lynx.prototype.decrement = <span class="fstat-no" title="function not covered" >function decrement(stats, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  this.count(stats, -1, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function count(stats, delta, sample_rate)
+// #### @stats       {String|Array} Stat key, in `foo:1|ms` would be foo
+//      Optionally an array of `stats`.
+// #### @delta       {Number} Amount to add (or remove) from given stat
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.count('python.fun', -100);
+//
+// Sends counting information to statsd. Normally this is invoked via 
+// `increment` or `decrement`
+//
+Lynx.prototype.count = <span class="fstat-no" title="function not covered" >function count(stats, delta, sample_rate) {</span>
+  //
+  // If we are given a string stat (key) then transform it into array
+  //
+<span class="cstat-no" title="statement not covered" >  if (typeof stats === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    stats = [stats];</span>
+  }
+&nbsp;
+  //
+  // By now stats must be an array
+  //
+<span class="cstat-no" title="statement not covered" >  if(!Array.isArray(stats)) {</span>
+    //
+    // Error: Can't set if its not even an array by now
+    //
+<span class="cstat-no" title="statement not covered" >    this.on_error(</span>
+      makeError({ message : "Can't set if its not even an array by now"
+      , f       : 'count'
+      , args    : arguments
+      }));
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+  //
+  // Delta is required and must exist or we will send crap to statsd
+  //
+<span class="cstat-no" title="statement not covered" >  if (typeof delta!=='number' &amp;&amp; typeof delta!=='string' || isNaN(delta)) {</span>
+    //
+    // Error: Must be either a number or a string, we cant send other stuff
+    //
+<span class="cstat-no" title="statement not covered" >    this.on_error(</span>
+      makeError({ message : 'Must be either a number or a string'
+      , f       : 'count'
+      , args    : arguments
+      }));
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+  //
+  // Batch up all these stats to send
+  //
+<span class="cstat-no" title="statement not covered" >  var batch = {};</span>
+<span class="cstat-no" title="statement not covered" >  for(var i in stats) {</span>
+<span class="cstat-no" title="statement not covered" >    batch[stats[i]] = delta + '|c';</span>
+  }
+&nbsp;
+  //
+  // Send all these stats
+  //
+<span class="cstat-no" title="statement not covered" >  this.send(batch, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function timing(stat, duration, sample_rate)
+// #### @stat        {String} Stat key, in `foo:1|ms` would be foo
+// #### @duration    {Number} Timing duration in ms.
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.timing('foo.bar.time', 500);
+//
+// Sends timing information for a given stat.
+//
+Lynx.prototype.timing = <span class="fstat-no" title="function not covered" >function timing(stat, duration, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  var stats   = {};</span>
+<span class="cstat-no" title="statement not covered" >  stats[stat] = duration + '|ms';</span>
+<span class="cstat-no" title="statement not covered" >  this.send(stats, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function set(stat, value, sample_rate)
+// #### @stat        {String} Stat key, in `foo:1|s` would be foo
+// #### @value       {Number} Value for this set
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.set('set1.bar', 567);
+//
+// Set for a specific stat
+//
+Lynx.prototype.set = <span class="fstat-no" title="function not covered" >function set(stat, value, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  var stats   = {};</span>
+<span class="cstat-no" title="statement not covered" >  stats[stat] = value + '|s';</span>
+<span class="cstat-no" title="statement not covered" >  this.send(stats, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function gauge(stat, value, sample_rate)
+// #### @stat        {String} Stat key, in `foo:1|g` would be foo
+// #### @value       {Number} Value for this set
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var client = new lynx('localhost', 8125);
+// client.gauge('gauge1.bar', 567);
+//
+// Send a gauge to statsd
+//
+Lynx.prototype.gauge = <span class="fstat-no" title="function not covered" >function gauge(stat, value, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  var stats   = {};</span>
+<span class="cstat-no" title="statement not covered" >  stats[stat] = value + '|g';</span>
+<span class="cstat-no" title="statement not covered" >  this.send(stats, sample_rate);</span>
+};
+&nbsp;
+//
+// ### function send(stats, sample_rate)
+// #### @stats       {Object} A stats object
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var lynx = require('lynx');
+// var client = new lynx('localhost', 8125);
+// client.send(
+//   { "foo" : "1|c"
+//   , "bar" : "-1|c"
+//   , "baz" : "500|ms"
+//   });
+//
+// Will sample this data for a given sample_rate. If a random generated
+// number matches that sample_rate then stats get returned and the sample
+// rate gets appended ("|@0.5" in this case). Else we get an empty object.
+//
+Lynx.prototype.send = <span class="fstat-no" title="function not covered" >function send(stats, sample_rate) {</span>
+<span class="cstat-no" title="statement not covered" >  var self          = this</span>
+    , sampled_stats = Lynx.sample(stats, sample_rate)
+    , all_stats     = Object.keys(sampled_stats)
+    //
+    // Data to be sent
+    //
+    , send_data
+    ;
+&nbsp;
+  //
+  // If this object is empty (enumerable properties)
+  //
+<span class="cstat-no" title="statement not covered" >  if(all_stats.length === 0) {</span>
+    //
+    // Error: Nothing to send
+    //
+<span class="cstat-no" title="statement not covered" >    this.on_error(</span>
+      makeError({ message : 'Nothing to send'
+      , f       : 'send'
+      , args    : arguments
+      }));
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+  //
+  // Construct our send request
+  // If we have multiple stats send them in the same udp package
+  // This is achieved by having newline separated stats.
+  //
+<span class="cstat-no" title="statement not covered" >  send_data = all_stats.map(<span class="fstat-no" title="function not covered" >function construct_stat(stat) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return self.scope + stat + ':' + sampled_stats[stat];</span>
+  }).join('\n');
+&nbsp;
+  //
+  // Encode our data to a buffer
+  //
+<span class="cstat-no" title="statement not covered" >  var buffer = new Buffer(send_data, 'utf8')</span>
+    , socket
+    ;
+&nbsp;
+  //
+  // Do we already have a socket object we can use?
+  //
+<span class="cstat-no" title="statement not covered" >  if (this.socket === undefined) {</span>
+    //
+    // Do we have an ephemeral socket we can use?
+    //
+<span class="cstat-no" title="statement not covered" >    if (!this.ephemeral_socket) {</span>
+      //
+      // Create one
+      //
+<span class="cstat-no" title="statement not covered" >      this.ephemeral_socket = dgram.createSocket('udp4');</span>
+&nbsp;
+      //
+      // Register on error: Failed sending the buffer
+      //
+<span class="cstat-no" title="statement not covered" >      this.ephemeral_socket.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        err.reason  = err.message;</span>
+<span class="cstat-no" title="statement not covered" >        err.f       = 'send';</span>
+<span class="cstat-no" title="statement not covered" >        err.message = 'Failed sending the buffer';</span>
+<span class="cstat-no" title="statement not covered" >        err.args    = arguments;</span>
+<span class="cstat-no" title="statement not covered" >        self.on_error(err);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    socket = this.ephemeral_socket;</span>
+  } else {
+    //
+    // Reuse our socket
+    //
+<span class="cstat-no" title="statement not covered" >    socket = this.socket;</span>
+  }
+&nbsp;
+  //
+  // Update the last time this socket was used
+  // This is used to make the socket ephemeral
+  //
+<span class="cstat-no" title="statement not covered" >  this._update_last_used();</span>
+&nbsp;
+  //
+  // Send the data
+  //
+<span class="cstat-no" title="statement not covered" >  this.emit('data', buffer);</span>
+<span class="cstat-no" title="statement not covered" >  socket.send(buffer, 0, buffer.length, this.port, this.host, noop);</span>
+};
+&nbsp;
+//
+// ### function close()
+//
+// var client = new lynx('localhost', 8125);
+// client.increment("zigzag");
+// client.close();
+//
+// Closes our socket object after we are done with it
+//
+Lynx.prototype.close = <span class="fstat-no" title="function not covered" >function close() {</span>
+  //
+  // User defined socket
+  //
+<span class="cstat-no" title="statement not covered" >  if (this.socket) {</span>
+<span class="cstat-no" title="statement not covered" >    this.socket.close();</span>
+<span class="cstat-no" title="statement not covered" >    this.socket = undefined;</span>
+  }
+&nbsp;
+  //
+  // Ephemeral socket
+  //
+<span class="cstat-no" title="statement not covered" >  if (this.ephemeral_socket) {</span>
+<span class="cstat-no" title="statement not covered" >    this.ephemeral_socket.close();</span>
+<span class="cstat-no" title="statement not covered" >    this.ephemeral_socket = undefined;</span>
+  }
+&nbsp;
+  //
+  // Timer
+  //
+<span class="cstat-no" title="statement not covered" >  if (this.last_used_timer) {</span>
+<span class="cstat-no" title="statement not covered" >    clearTimeout(this.last_used_timer);</span>
+<span class="cstat-no" title="statement not covered" >    this.last_used_timer = undefined;</span>
+  }
+};
+&nbsp;
+&nbsp;
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ streams ~~
+//
+&nbsp;
+//
+// ### function write()
+//
+// Implements `Stream.prototype.write()`.
+//
+Lynx.prototype.write = <span class="fstat-no" title="function not covered" >function write(buffer) {</span>
+<span class="cstat-no" title="statement not covered" >  this.parser.write(buffer);</span>
+};
+&nbsp;
+//
+// ### function end()
+//
+// Implements `Stream.prototype.end()`.
+//
+Lynx.prototype.end = <span class="fstat-no" title="function not covered" >function end(buffer) {</span>
+  //
+  // If there's stuff to flush please do
+  //
+<span class="cstat-no" title="statement not covered" >  if (arguments.length) {</span>
+<span class="cstat-no" title="statement not covered" >    this.write(buffer);</span>
+  }
+&nbsp;
+  //
+  // Make this not writable
+  //
+<span class="cstat-no" title="statement not covered" >  this.writable = false;</span>
+};
+&nbsp;
+//
+// ### function destroy()
+//
+// Implements `Stream.prototype.destroy()`. Nothing to do here, we don't
+// open any stuff
+//
+Lynx.prototype.destroy = <span class="fstat-no" title="function not covered" >function destroy() {</span>
+<span class="cstat-no" title="statement not covered" >  this.writable = false;</span>
+};
+&nbsp;
+&nbsp;
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ aux ~~
+//
+&nbsp;
+//
+// ### function sample(stats, sample_rate)
+// #### @stats       {Object} A stats object
+// #### @sample_rate {Number} Determines the sampling rate, e.g. how many
+//      packets should be sent. If set to 0.1 it sends 1 in each 10.
+//
+// var lynx = require('lynx');
+// lynx.sample(
+//   { "foo" : "1|c"
+//   , "bar" : "-1|c"
+//   , "baz" : "500|ms"
+//   }, 0.5);
+//
+// Will sample this data for a given sample_rate. If a random generated
+// number matches that sample_rate then stats get returned and the sample
+// rate gets appended ("|@0.5" in this case). Else we get an empty object.
+//
+Lynx.sample = <span class="fstat-no" title="function not covered" >function sample(stats, sample_rate) {</span>
+  //
+  // If we don't have a sample rate between 0 and 1
+  //
+<span class="cstat-no" title="statement not covered" >  if (typeof sample_rate !== 'number' || sample_rate &gt; 1 || sample_rate &lt; 0) {</span>
+    //
+    // Had to ignore the invalid sample rate
+    // Most of the times this is because sample_rate is undefined
+    //
+<span class="cstat-no" title="statement not covered" >    return stats;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var sampled_stats = {};</span>
+&nbsp;
+  //
+  // Randomly determine if we should sample this specific instance
+  //
+<span class="cstat-no" title="statement not covered" >  if (mt.genrand_real2(0,1) &lt;= sample_rate) {</span>
+    //
+    // Note: Current implementation either sends all stats for a specific
+    //       sample rate or sends none. Makes one wonder if granularity
+    //       should be at the individual stat level
+    //
+<span class="cstat-no" title="statement not covered" >    Object.keys(stats).forEach(<span class="fstat-no" title="function not covered" >function construct_sampled(stat) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var value = stats[stat];</span>
+<span class="cstat-no" title="statement not covered" >      sampled_stats[stat] = value + '|@' + sample_rate;</span>
+    });
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return sampled_stats;</span>
+};
+&nbsp;
+//
+// ### function _update_last_used()
+//
+// An internal function update the last time the socket was
+// used.  This function is called when the socket is used
+// and causes demand allocated ephemeral sockets to be closed
+// after a period of inactivity.
+//
+Lynx.prototype._update_last_used = <span class="fstat-no" title="function not covered" >function _update_last_used() {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+&nbsp;
+  //
+  // Only update on the ephemeral socket
+  //
+<span class="cstat-no" title="statement not covered" >  if (this.ephemeral_socket) {</span>
+    //
+    // Clear existing timeouts
+    //
+<span class="cstat-no" title="statement not covered" >    if (this.last_used_timer) {</span>
+<span class="cstat-no" title="statement not covered" >      clearTimeout(this.last_used_timer);</span>
+    }
+&nbsp;
+    //
+    // Update last_used_timer
+    //
+<span class="cstat-no" title="statement not covered" >    this.last_used_timer = setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+      //
+      // If we have an open socket close it
+      //
+<span class="cstat-no" title="statement not covered" >      if (self.ephemeral_socket) {</span>
+<span class="cstat-no" title="statement not covered" >        self.ephemeral_socket.close();</span>
+      }
+&nbsp;
+      //
+      // Delete the socket
+      //
+<span class="cstat-no" title="statement not covered" >      delete self.ephemeral_socket;</span>
+    }, EPHEMERAL_LIFETIME_MS);
+  }
+};
+&nbsp;
+//
+// ### function default_error_handler()
+// #### @err  {Object} The error object. Includes:
+// err.message, err.*
+//
+// Function that defines what to do on error.
+// Errors are soft errors, and while interesting they are mostly informative
+// A simple console log would do but that doesn't allow people to do
+// custom stuff with errors
+//
+Lynx.prototype._default_error_handler = <span class="fstat-no" title="function not covered" >function _default_error_handler(e) {</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('error', e);</span>
+};
+&nbsp;
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ exports ~~
+//
+&nbsp;
+module.exports = Lynx;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 02:00:19 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
